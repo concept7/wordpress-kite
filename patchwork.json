@@ -1,0 +1,9 @@
+{
+    "redefinable-internals": [
+        "getenv",
+        "function_exists",
+        "gethostname",
+        "phpversion",
+        "defined"
+    ]
+}

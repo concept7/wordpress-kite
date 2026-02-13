@@ -1,0 +1,66 @@
+{
+    "name": "concept7/wordpress-kite",
+    "description": "WordPress Kite monitoring plugin for Bedrock projects",
+    "keywords": [
+        "Concept7",
+        "wordpress",
+        "kite",
+        "monitoring"
+    ],
+    "homepage": "https://gitlab.concept7.nl/workflow/wordpress-kite",
+    "license": "MIT",
+    "type": "wordpress-muplugin",
+    "authors": [
+        {
+            "name": "Martijn Wagena",
+            "email": "martijn@concept7.nl",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../kite"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "composer/installers": "^2.0",
+        "concept7/kite": "dev-develop"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Concept7\\WordPressKite\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Concept7\\WordPressKite\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "installer-name": "wordpress-kite"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
