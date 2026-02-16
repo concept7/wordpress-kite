@@ -66,5 +66,5 @@ test('actions returns array with default actions', function () {
     $actions = $plugin->actions();
 
     expect($actions)->toBeArray();
-    expect($actions)->toHaveCount(3);
+    expect($actions)->toHaveCount(4);
 });

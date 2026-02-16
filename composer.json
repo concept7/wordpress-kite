@@ -20,13 +20,13 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../kite"
+            "url": "../kite-php-sdk"
         }
     ],
     "require": {
         "php": "^8.2",
         "composer/installers": "^2.0",
-        "concept7/kite": "dev-develop"
+        "concept7/kite-php-sdk": "dev-develop"
     },
     "require-dev": {
         "brain/monkey": "^2.6",

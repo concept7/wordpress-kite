@@ -2,7 +2,7 @@
 
 use Brain\Monkey\Functions;
 use Concept7\Kite\Actions\GetComposerPackageVersionAction;
-use Concept7\Kite\Support\Collection;
+use Illuminate\Support\Collection;
 use Concept7\WordPressKite\Actions\GetAcfProVersionAction;
 use Concept7\WordPressKite\Actions\GetWooCommerceVersionAction;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;

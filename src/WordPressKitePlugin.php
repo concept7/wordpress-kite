@@ -70,10 +70,6 @@ class WordPressKitePlugin
 
     protected function env(string $key, mixed $default = null): mixed
     {
-        if (function_exists('env')) {
-            return env($key) ?? $default;
-        }
-
         return getenv($key) ?: $default;
     }
 }
