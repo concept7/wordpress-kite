@@ -41,7 +41,7 @@ test('scheduleCron skips when already scheduled', function () {
     expect(true)->toBeTrue();
 });
 
-test('report returns null when config is invalid', function () {
+test('report throws when config is invalid', function () {
     // Ensure env vars are not set
     putenv('KITE_URI');
     putenv('KITE_PROJECT_ID');
@@ -52,10 +52,8 @@ test('report returns null when config is invalid', function () {
     });
 
     $plugin = new WordPressKitePlugin;
-    $result = $plugin->report();
-
-    expect($result)->toBeNull();
-});
+    $plugin->report();
+})->throws(\Exception::class, 'Project credentials are missing!');
 
 test('actions returns array with default actions', function () {
     Functions\when('apply_filters')->alias(function ($hook, $value) {

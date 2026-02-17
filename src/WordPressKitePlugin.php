@@ -2,14 +2,14 @@
 
 namespace Concept7\WordPressKite;
 
+use Concept7\Kite\Http\Integrations\Kite\Dtos\ProjectReportDto;
 use Concept7\Kite\Kite;
 use Concept7\Kite\KiteConfig;
-use Concept7\Kite\ReportResult;
 use Concept7\WordPressKite\Actions\GetAcfProVersionAction;
 use Concept7\WordPressKite\Actions\GetWooCommerceVersionAction;
 use Concept7\WordPressKite\Actions\GetWordpressKiteVersionAction;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
-use Concept7\WordPressKite\Cli\KiteReportCommand;
+use Concept7\WordPressKite\Commands\KiteReportCommand;
 use Concept7\WordPressKite\ProjectInfo\WordPressProjectInfoCollector;
 
 class WordPressKitePlugin
@@ -17,7 +17,7 @@ class WordPressKitePlugin
     public function boot(): void
     {
         add_action('init', [$this, 'scheduleCron']);
-        add_action('kite_daily_report', [$this, 'report']);
+        add_action('kite_daily_report', [$this, 'cronReport']);
 
         if (defined('WP_CLI') && WP_CLI) {
             \WP_CLI::add_command('kite report', new KiteReportCommand($this));
@@ -31,17 +31,20 @@ class WordPressKitePlugin
         }
     }
 
-    public function report(): ?ReportResult
+    public function cronReport(): void
     {
-        $config = $this->config();
-
-        if (! $config->isValid()) {
-            return null;
+        try {
+            $this->report();
+        } catch (\Throwable) {
+            //
         }
+    }
 
+    public function report(): ProjectReportDto
+    {
         $actions = array_map(fn ($action) => new $action, $this->actions());
 
-        return Kite::make($config)
+        return Kite::make($this->config())
             ->projectInfoCollector(new WordPressProjectInfoCollector)
             ->addActions($actions)
             ->report();
