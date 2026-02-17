@@ -19,14 +19,14 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "../kite-php-sdk"
+            "type": "composer",
+            "url": "https://packagist.concept7.dev"
         }
     ],
     "require": {
         "php": "^8.2",
         "composer/installers": "^2.0",
-        "concept7/kite-php-sdk": "dev-develop"
+        "concept7/kite-php-sdk": "^0.0.1"
     },
     "require-dev": {
         "brain/monkey": "^2.6",
