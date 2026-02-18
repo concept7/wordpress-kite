@@ -53,9 +53,9 @@ class WordPressKitePlugin
     public function config(): KiteConfig
     {
         return new KiteConfig(
-            uri: $this->env('KITE_URI', ''),
-            projectId: $this->env('KITE_PROJECT_ID', ''),
-            projectKey: $this->env('KITE_PROJECT_KEY', ''),
+            uri: $this->env('KITE_URI'),
+            projectId: $this->env('KITE_PROJECT_ID'),
+            projectKey: $this->env('KITE_PROJECT_KEY'),
         );
     }
 
