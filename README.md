@@ -32,16 +32,12 @@ KITE_PROJECT_KEY=your-api-key
 - PHP version
 - Site URL
 - Installed Composer packages (name + version)
-- Installed WordPress plugins (name, version, active status)
 
 ### Meta (via pipeline actions)
 
-- PHP version
-- MySQL version
 - WordPress version
 - WooCommerce version (if installed)
 - ACF Pro version (if installed)
-- Tailwind CSS version (if installed)
 
 ## WP-CLI
 
