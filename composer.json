@@ -26,7 +26,7 @@
     "require": {
         "php": "^8.2",
         "composer/installers": "^2.0",
-        "concept7/kite-php-sdk": "^0.0.8"
+        "concept7/kite-php-sdk": "^0.0.9"
     },
     "require-dev": {
         "brain/monkey": "^2.6",

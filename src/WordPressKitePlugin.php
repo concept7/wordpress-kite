@@ -35,8 +35,8 @@ class WordPressKitePlugin
     {
         try {
             $this->report();
-        } catch (\Throwable) {
-            //
+        } catch (\Throwable $e) {
+            error_log(sprintf('[Kite] Report failed: %s', $e->getMessage()));
         }
     }
 
