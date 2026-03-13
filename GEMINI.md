@@ -46,7 +46,7 @@ wp kite report             # Trigger a report manually
 - **Base action classes** in core for reuse: `GetComposerPackageVersionAction` (checks `Composer\InstalledVersions`). WordPress-specific actions extend these.
 - **WP-Cron scheduling**: Uses `wp_schedule_event('daily')` with idempotent scheduling check.
 - **Filter extensibility**: `apply_filters('kite_actions', $actions)` allows themes/plugins to add custom actions.
-- **Value objects**: `KiteConfig` (uri, projectId, projectKey — immutable with validation), `ReportResult` (static constructors `success()`/`failure()`).
+- **Value objects**: `KiteConfig` (token, uri — immutable with validation), `ReportResult` (static constructors `success()`/`failure()`).
 - **Fluent API**: `Kite::make($config)->projectInfoCollector(...)->addAction(...)->report()`.
 
 ### Key Files
@@ -62,9 +62,8 @@ wp kite report             # Trigger a report manually
 
 The plugin is configured using environment variables in the `.env` file:
 
-- `KITE_URI` — Base URL of Kite API (required)
-- `KITE_PROJECT_ID` — Project identifier (required)
-- `KITE_PROJECT_KEY` — API auth key (required)
+- `KITE_TOKEN` — API authentication token (required)
+- `KITE_URI` — Optional: override the Kite API base URL (for development)
 
 ## Conventions
 
