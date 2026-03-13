@@ -14,34 +14,51 @@ The package will automatically install as an mu-plugin in `web/app/mu-plugins/wo
 
 ## Configuration
 
-Add the following environment variables to your `.env` file:
+Add the `KITE_TOKEN` to your `.env` file (generated from the [Kite Dashboard](https://kite-monitor.concept7.dev/)):
 
 ```env
-KITE_URI=https://kite.example.com
-KITE_PROJECT_ID=your-project-uuid
-KITE_PROJECT_KEY=your-api-key
+KITE_TOKEN=your-kite-token
 ```
 
-## What Gets Reported
+Optionally override the API base URL for development:
 
-### Project Info
+```env
+KITE_URI=https://kite.test
+```
 
-- Hostname
-- Environment type (`production`, `staging`, `development`, `local`)
-- Debug mode status
-- PHP version
-- Site URL
-- Installed Composer packages (name + version)
-- Installed WordPress plugins (name, version, active status)
+## What gets reported
+
+### Project info
+
+| Field | Description |
+|---|---|
+| `hostname` | Server hostname |
+| `environment` | WordPress environment type (`production`, `staging`, `development`, `local`) |
+| `is_debug_mode_on` | Whether `WP_DEBUG` is enabled |
+| `php_version` | PHP version |
+| `url` | Site URL |
+| `packages` | Installed Composer, npm, and WordPress packages |
+
+Packages are collected from three sources:
+
+- **Composer** — direct dependencies from `composer.json`
+- **npm** — installed packages from `package-lock.json`
+- **WordPress** — all installed plugins and themes
+
+Each package is tagged with its ecosystem (`composer`, `npm`, or `wordpress`) for proper categorization on the dashboard.
 
 ### Meta (via pipeline actions)
 
-- PHP version
-- MySQL version
-- WordPress version
-- WooCommerce version (if installed)
-- ACF Pro version (if installed)
-- Tailwind CSS version (if installed)
+The core SDK provides default actions for PHP, MySQL/MariaDB, Tailwind CSS, and Kite SDK versions. WordPress-specific actions are added on top:
+
+| Action | Meta key | Description |
+|---|---|---|
+| `GetWordPressVersionAction` | `wordpress_version` | WordPress core version |
+| `GetWooCommerceVersionAction` | `woocommerce_version` | WooCommerce version (if installed) |
+| `GetAcfProVersionAction` | `acf_pro_version` | ACF Pro version (if installed) |
+| `GetWordpressKiteVersionAction` | `wordpress_kite_version` | WordPress Kite package version |
+
+Actions for packages that aren't installed are automatically skipped.
 
 ## WP-CLI
 
@@ -51,7 +68,7 @@ Run a report manually:
 wp kite report
 ```
 
-## Customizing Actions
+## Customizing actions
 
 Add or remove actions using the `kite_actions` filter:
 
@@ -66,7 +83,7 @@ Custom actions must implement `Concept7\Kite\Contracts\ActionInterface`.
 
 ## Scheduling
 
-Reports are sent automatically once daily via WP-Cron. The cron event `kite_daily_report` is registered on the `init` hook.
+Reports are sent automatically once daily via WP-Cron. The cron event `kite_daily_report` is registered on the `init` hook. Failed reports are logged to `error_log`.
 
 ## Development
 

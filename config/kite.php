@@ -6,15 +6,13 @@
  * This file documents the expected environment variables for wordpress-kite.
  * In a Bedrock project, define these in your .env file.
  *
- * KITE_URI         - Base URL of the Kite API (e.g. https://kite.example.com)
- * KITE_PROJECT_ID  - Project UUID from the Kite dashboard
- * KITE_PROJECT_KEY - API authentication key for the project
+ * KITE_TOKEN - API authentication token for the project
+ * KITE_URI   - Optional: override the Kite API base URL (for development)
  */
 
 return [
+    'token' => env('KITE_TOKEN', ''),
     'uri' => env('KITE_URI', ''),
-    'project_id' => env('KITE_PROJECT_ID', ''),
-    'project_key' => env('KITE_PROJECT_KEY', ''),
 
     'actions' => [
         \Concept7\WordPressKite\Actions\GetWordPressVersionAction::class,

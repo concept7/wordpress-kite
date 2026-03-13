@@ -43,9 +43,8 @@ test('scheduleCron skips when already scheduled', function () {
 
 test('report throws when config is invalid', function () {
     // Ensure env vars are not set
+    putenv('KITE_TOKEN');
     putenv('KITE_URI');
-    putenv('KITE_PROJECT_ID');
-    putenv('KITE_PROJECT_KEY');
 
     Functions\when('apply_filters')->alias(function ($hook, $value) {
         return $value;
