@@ -72,6 +72,6 @@ class WordPressKitePlugin
 
     protected function env(string $key, mixed $default = null): mixed
     {
-        return getenv($key) ?: $default;
+        return getenv($key) ?: ($_ENV[$key] ?? $_SERVER[$key] ?? $default);
     }
 }
