@@ -18,7 +18,7 @@ class WordPressProjectInfoCollector implements ProjectInfoCollectorInterface
             'php_version' => phpversion(),
             'url' => get_site_url(),
             'packages' => array_merge(
-                ComposerDependencies::all(),
+                ComposerDependencies::direct(),
                 NpmDependencies::installed(),
                 WordPressPackages::installed(),
             ),
