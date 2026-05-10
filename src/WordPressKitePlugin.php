@@ -9,6 +9,7 @@ use Concept7\WordPressKite\Actions\GetAcfProVersionAction;
 use Concept7\WordPressKite\Actions\GetWooCommerceVersionAction;
 use Concept7\WordPressKite\Actions\GetWordpressKiteVersionAction;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
+use Concept7\WordPressKite\Commands\KiteCheckAdvisoriesCommand;
 use Concept7\WordPressKite\Commands\KiteReportCommand;
 use Concept7\WordPressKite\ProjectInfo\WordPressProjectInfoCollector;
 
@@ -18,9 +19,11 @@ class WordPressKitePlugin
     {
         add_action('init', [$this, 'scheduleCron']);
         add_action('kite_daily_report', [$this, 'cronReport']);
+        add_action('kite_hourly_advisory_check', [$this, 'cronCheckAdvisories']);
 
         if (defined('WP_CLI') && WP_CLI) {
             \WP_CLI::add_command('kite report', new KiteReportCommand($this));
+            \WP_CLI::add_command('kite check-advisories', new KiteCheckAdvisoriesCommand($this));
         }
     }
 
@@ -28,6 +31,10 @@ class WordPressKitePlugin
     {
         if (! wp_next_scheduled('kite_daily_report')) {
             wp_schedule_event(time(), 'daily', 'kite_daily_report');
+        }
+
+        if (! wp_next_scheduled('kite_hourly_advisory_check')) {
+            wp_schedule_event(time(), 'hourly', 'kite_hourly_advisory_check');
         }
     }
 
@@ -37,6 +44,15 @@ class WordPressKitePlugin
             $this->report();
         } catch (\Throwable $e) {
             error_log(sprintf('[Kite] Report failed: %s', $e->getMessage()));
+        }
+    }
+
+    public function cronCheckAdvisories(): void
+    {
+        try {
+            $this->checkAdvisories();
+        } catch (\Throwable $e) {
+            error_log(sprintf('[Kite] Advisory check failed: %s', $e->getMessage()));
         }
     }
 
@@ -50,11 +66,21 @@ class WordPressKitePlugin
             ->report();
     }
 
+    public function checkAdvisories(): void
+    {
+        Kite::make($this->config())
+            ->projectInfoCollector(new WordPressProjectInfoCollector)
+            ->checkAdvisories();
+    }
+
     public function config(): KiteConfig
     {
+        $monitoredPackages = $this->env('KITE_MONITORED_PACKAGES');
+
         return new KiteConfig(
             token: $this->env('KITE_TOKEN'),
             uri: $this->env('KITE_URI') ?: null,
+            monitoredPackages: $monitoredPackages ? explode(',', $monitoredPackages) : [],
         );
     }
 
