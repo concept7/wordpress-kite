@@ -75,13 +75,26 @@ class WordPressKitePlugin
 
     public function config(): KiteConfig
     {
-        $monitoredPackages = $this->env('KITE_MONITORED_PACKAGES');
+        $config = $this->loadConfig();
 
         return new KiteConfig(
             token: $this->env('KITE_TOKEN'),
             uri: $this->env('KITE_URI') ?: null,
-            monitoredPackages: $monitoredPackages ? explode(',', $monitoredPackages) : [],
+            monitoredPackages: $config['monitored_packages'] ?? [],
         );
+    }
+
+    private function loadConfig(): array
+    {
+        $path = trailingslashit(ABSPATH).'kite.php';
+
+        if (! file_exists($path)) {
+            return [];
+        }
+
+        $config = require $path;
+
+        return is_array($config) ? $config : [];
     }
 
     public function actions(): array
