@@ -15,7 +15,6 @@ class WordPressProjectInfoCollector implements ProjectInfoCollectorInterface
             'hostname' => gethostname(),
             'environment' => wp_get_environment_type(),
             'is_debug_mode_on' => defined('WP_DEBUG') && WP_DEBUG,
-            'php_version' => phpversion(),
             'url' => get_site_url(),
             'packages' => array_merge(
                 ComposerDependencies::all(),
