@@ -10,13 +10,13 @@
  * KITE_URI   - Optional: override the Kite API base URL (for development)
  */
 
+use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
+
 return [
     'token' => env('KITE_TOKEN', ''),
     'uri' => env('KITE_URI', ''),
 
     'actions' => [
-        \Concept7\WordPressKite\Actions\GetWordPressVersionAction::class,
-        \Concept7\WordPressKite\Actions\GetWooCommerceVersionAction::class,
-        \Concept7\WordPressKite\Actions\GetAcfProVersionAction::class,
+        GetWordPressVersionAction::class,
     ],
 ];
