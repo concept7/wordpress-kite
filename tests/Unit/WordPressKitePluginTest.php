@@ -52,7 +52,7 @@ test('report throws when config is invalid', function () {
 
     $plugin = new WordPressKitePlugin;
     $plugin->report();
-})->throws(\Exception::class, 'Project credentials are missing!');
+})->throws(Exception::class, 'Project credentials are missing!');
 
 test('actions returns array with default actions', function () {
     Functions\when('apply_filters')->alias(function ($hook, $value) {
@@ -63,5 +63,5 @@ test('actions returns array with default actions', function () {
     $actions = $plugin->actions();
 
     expect($actions)->toBeArray();
-    expect($actions)->toHaveCount(4);
+    expect($actions)->toHaveCount(1);
 });

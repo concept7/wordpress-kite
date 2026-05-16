@@ -10,7 +10,7 @@ class WordPressPackages
     public static function installed(): array
     {
         if (! function_exists('get_plugins')) {
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            require_once ABSPATH.'wp-admin/includes/plugin.php';
         }
 
         return [

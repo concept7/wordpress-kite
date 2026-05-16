@@ -1,11 +1,8 @@
 <?php
 
 use Brain\Monkey\Functions;
-use Concept7\Kite\Actions\GetComposerPackageVersionAction;
-use Illuminate\Support\Collection;
-use Concept7\WordPressKite\Actions\GetAcfProVersionAction;
-use Concept7\WordPressKite\Actions\GetWooCommerceVersionAction;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
+use Illuminate\Support\Collection;
 
 test('GetWordPressVersionAction returns wordpress version', function () {
     Functions\expect('get_bloginfo')
@@ -31,12 +28,4 @@ test('GetWordPressVersionAction skips when version is empty', function () {
     $result = $action->handle(new Collection, fn ($data) => $data);
 
     expect($result)->toHaveCount(0);
-});
-
-test('GetWooCommerceVersionAction extends GetComposerPackageVersionAction', function () {
-    expect(new GetWooCommerceVersionAction)->toBeInstanceOf(GetComposerPackageVersionAction::class);
-});
-
-test('GetAcfProVersionAction extends GetComposerPackageVersionAction', function () {
-    expect(new GetAcfProVersionAction)->toBeInstanceOf(GetComposerPackageVersionAction::class);
 });

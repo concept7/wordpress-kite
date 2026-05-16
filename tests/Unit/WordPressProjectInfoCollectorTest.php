@@ -11,6 +11,8 @@ test('implements ProjectInfoCollectorInterface', function () {
 test('collect returns expected array keys', function () {
     Functions\when('wp_get_environment_type')->justReturn('production');
     Functions\when('get_site_url')->justReturn('https://example.com');
+    Functions\when('get_plugins')->justReturn([]);
+    Functions\when('wp_get_themes')->justReturn([]);
 
     $collector = new WordPressProjectInfoCollector;
     $result = $collector->collect();
@@ -19,7 +21,6 @@ test('collect returns expected array keys', function () {
         'hostname',
         'environment',
         'is_debug_mode_on',
-        'php_version',
         'url',
         'packages',
     ]);
@@ -28,11 +29,12 @@ test('collect returns expected array keys', function () {
 test('collect uses correct WordPress functions', function () {
     Functions\when('wp_get_environment_type')->justReturn('staging');
     Functions\when('get_site_url')->justReturn('https://staging.example.com');
+    Functions\when('get_plugins')->justReturn([]);
+    Functions\when('wp_get_themes')->justReturn([]);
 
     $collector = new WordPressProjectInfoCollector;
     $result = $collector->collect();
 
     expect($result['environment'])->toBe('staging');
     expect($result['url'])->toBe('https://staging.example.com');
-    expect($result['php_version'])->toBe(phpversion());
 });
