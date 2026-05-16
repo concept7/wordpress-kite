@@ -5,9 +5,6 @@ namespace Concept7\WordPressKite;
 use Concept7\Kite\Http\Integrations\Kite\Dtos\ProjectReportDto;
 use Concept7\Kite\Kite;
 use Concept7\Kite\KiteConfig;
-use Concept7\WordPressKite\Actions\GetAcfProVersionAction;
-use Concept7\WordPressKite\Actions\GetWooCommerceVersionAction;
-use Concept7\WordPressKite\Actions\GetWordpressKiteVersionAction;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
 use Concept7\WordPressKite\Commands\KiteReportCommand;
 use Concept7\WordPressKite\ProjectInfo\WordPressProjectInfoCollector;
@@ -62,9 +59,6 @@ class WordPressKitePlugin
     {
         $actions = [
             GetWordPressVersionAction::class,
-            GetWooCommerceVersionAction::class,
-            GetAcfProVersionAction::class,
-            GetWordpressKiteVersionAction::class,
         ];
 
         return apply_filters('kite_actions', $actions);
