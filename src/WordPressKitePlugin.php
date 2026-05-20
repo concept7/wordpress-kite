@@ -7,12 +7,16 @@ use Concept7\Kite\Kite;
 use Concept7\Kite\KiteConfig;
 use Concept7\WordPressKite\Actions\GetWordPressVersionAction;
 use Concept7\WordPressKite\Commands\KiteReportCommand;
+use Concept7\WordPressKite\Http\WordPressGuzzleSender;
 use Concept7\WordPressKite\ProjectInfo\WordPressProjectInfoCollector;
+use Saloon\Config;
 
 class WordPressKitePlugin
 {
     public function boot(): void
     {
+        Config::$defaultSender = WordPressGuzzleSender::class;
+
         add_action('init', [$this, 'scheduleCron']);
         add_action('kite_daily_report', [$this, 'cronReport']);
 
