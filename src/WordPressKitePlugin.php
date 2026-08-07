@@ -115,7 +115,7 @@ class WordPressKitePlugin
         return apply_filters('kite_actions', $actions);
     }
 
-    protected function env(string $key, mixed $default = null): mixed
+    protected function env(string $key, string|int|null $default = null): string|int|null
     {
         return getenv($key) ?: ($_ENV[$key] ?? $_SERVER[$key] ?? $default);
     }
