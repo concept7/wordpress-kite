@@ -39,7 +39,7 @@ class WordPressKitePlugin
         }
 
         if (! wp_next_scheduled('kite_check_advisories')) {
-            wp_schedule_event(time(), 'hourly', 'kite_check_advisories');
+            wp_schedule_event(time() + 30 * MINUTE_IN_SECONDS, 'hourly', 'kite_check_advisories');
         }
     }
 
