@@ -1,6 +1,6 @@
 # WordPress Kite
 
-A WordPress mu-plugin that reports project metadata to the [Kite](https://gitlab.concept7.nl/workflow/kite-backend) monitoring API.
+A WordPress mu-plugin that reports project metadata to the [Kite](https://kite-monitor.com) monitoring API.
 
 ## Installation
 
