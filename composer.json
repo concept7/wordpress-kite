@@ -7,7 +7,7 @@
         "kite",
         "monitoring"
     ],
-    "homepage": "https://gitlab.concept7.nl/workflow/wordpress-kite",
+    "homepage": "https://github.com/concept7/wordpress-kite",
     "license": "MIT",
     "type": "wordpress-muplugin",
     "authors": [
@@ -17,16 +17,14 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packagist.concept7.dev"
-        }
-    ],
+    "support": {
+        "issues": "https://github.com/concept7/wordpress-kite/issues",
+        "source": "https://github.com/concept7/wordpress-kite"
+    },
     "require": {
         "php": "^8.2",
         "composer/installers": "^2.0",
-        "concept7/kite-php-sdk": "^0.1.2"
+        "concept7/kite-php-sdk": "^0.1.4"
     },
     "require-dev": {
         "brain/monkey": "^2.6",
