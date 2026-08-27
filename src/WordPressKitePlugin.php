@@ -39,7 +39,7 @@ class WordPressKitePlugin
         }
 
         if (! wp_next_scheduled('kite_check_advisories')) {
-            wp_schedule_event(time(), 'hourly', 'kite_check_advisories');
+            wp_schedule_event(time() + 30 * MINUTE_IN_SECONDS, 'hourly', 'kite_check_advisories');
         }
     }
 
@@ -115,7 +115,7 @@ class WordPressKitePlugin
         return apply_filters('kite_actions', $actions);
     }
 
-    protected function env(string $key, mixed $default = null): mixed
+    protected function env(string $key, string|int|null $default = null): string|int|null
     {
         return getenv($key) ?: ($_ENV[$key] ?? $_SERVER[$key] ?? $default);
     }

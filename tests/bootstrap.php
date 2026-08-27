@@ -12,3 +12,11 @@ if (! defined('ABSPATH')) {
 if (! defined('WP_DEBUG')) {
     define('WP_DEBUG', false);
 }
+
+if (! defined('MINUTE_IN_SECONDS')) {
+    define('MINUTE_IN_SECONDS', 60);
+}
+
+if (! defined('HOUR_IN_SECONDS')) {
+    define('HOUR_IN_SECONDS', 3600);
+}
