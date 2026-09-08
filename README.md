@@ -1,5 +1,8 @@
 # WordPress Kite
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/concept7/wordpress-kite.svg?style=flat-square)](https://packagist.org/packages/concept7/wordpress-kite)
+[![Total Downloads](https://img.shields.io/packagist/dt/concept7/wordpress-kite.svg?style=flat-square)](https://packagist.org/packages/concept7/wordpress-kite)
+
 A WordPress mu-plugin that reports project metadata to the [Kite](https://kite-monitor.com) monitoring API.
 
 ## Installation
